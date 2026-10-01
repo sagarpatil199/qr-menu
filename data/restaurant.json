@@ -1,0 +1,44 @@
+{
+  "name": "Hotel Shivneri",
+  "tagline": "Authentic Taste Since 1995",
+  "description": "Family restaurant in Belagavi serving South Indian breakfast, North Indian curries, biryani and Indo-Chinese favourites.",
+  "logo": "assets/logo/logo.svg",
+  "coverImage": "",
+
+  "phone": "+919876543210",
+  "whatsapp": "+919876543210",
+  "whatsappMessage": "Hello Hotel Shivneri! I saw your menu and would like to know more.",
+  "email": "",
+
+  "address": "Shivneri Complex, College Road, Belagavi, Karnataka 590001",
+  "googleMapsUrl": "https://maps.google.com/?q=Belagavi+Karnataka",
+
+  "instagram": "https://instagram.com/",
+  "facebook": "https://facebook.com/",
+  "website": "",
+
+  "currency": "₹",
+  "cuisine": ["South Indian", "North Indian", "Biryani", "Chinese"],
+  "priceRange": "₹₹",
+
+  "notice": "Prices are inclusive of all taxes. Please inform our staff about any food allergies.",
+  "footerNote": "Menu prices and availability may change without notice.",
+
+  "timezone": "Asia/Kolkata",
+  "openingHours": [
+    { "day": "Monday",    "open": "07:00", "close": "22:30" },
+    { "day": "Tuesday",   "open": "07:00", "close": "22:30" },
+    { "day": "Wednesday", "open": "07:00", "close": "22:30" },
+    { "day": "Thursday",  "open": "07:00", "close": "22:30" },
+    { "day": "Friday",    "open": "07:00", "close": "23:00" },
+    { "day": "Saturday",  "open": "07:00", "close": "23:00" },
+    { "day": "Sunday",    "open": "08:00", "close": "23:00" }
+  ],
+
+  "siteUrl": "https://sagarpatil199.github.io/hotel-shivneri-menu/",
+
+  "theme": {
+    "primary": "#8B0000",
+    "secondary": "#F5E6C8"
+  }
+}

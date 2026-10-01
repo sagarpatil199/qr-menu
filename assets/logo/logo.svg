@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Hotel Shivneri logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#A31515"/>
+      <stop offset="1" stop-color="#6B0000"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="96" fill="url(#g)"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#F5E6C8" stroke-width="2.5" stroke-dasharray="2 5"/>
+  <!-- fort silhouette (Shivneri) -->
+  <path d="M52 118 v-22 h8 v-8 h8 v8 h10 v-14 h8 v-8 h8 v8 h12 v-8 h8 v8 h8 v14 h10 v-8 h8 v8 h8 v22 z" fill="#F5E6C8"/>
+  <path d="M94 118 v-16 a6 6 0 0 1 12 0 v16 z" fill="#8B0000"/>
+  <path d="M100 58 v-18 l16 6 -16 6" fill="#E9B44C" stroke="#E9B44C" stroke-width="2" stroke-linejoin="round"/>
+  <text x="100" y="146" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="700" letter-spacing="3" fill="#F5E6C8">SHIVNERI</text>
+  <text x="100" y="164" text-anchor="middle" font-family="Georgia, serif" font-size="9" letter-spacing="3" fill="#E9B44C">EST. 1995</text>
+</svg>
