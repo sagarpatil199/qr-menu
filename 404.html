@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#8B0000">
+  <!--
+    GitHub Pages shows this page for any wrong address, at any folder depth,
+    so it is fully self-contained (inline styles, no relative CSS/JS files).
+    It contains no restaurant-specific text; no need to edit it per customer.
+  -->
+  <style>
+    :root { --primary: #8b0000; --bg: #faf3e6; --ink: #221a16; --ink-2: #5b4f47; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(90% 60% at 50% 0%, rgba(139, 0, 0, 0.08), transparent 70%),
+        var(--bg);
+      text-align: center;
+    }
+    main { max-width: 420px; }
+    .plate {
+      width: 120px; height: 120px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: inset 0 0 0 14px #f4efe6, inset 0 0 0 16px #e4dccd, 0 12px 30px rgba(40, 20, 10, 0.12);
+      display: grid;
+      place-items: center;
+      font: 700 2rem/1 Georgia, "Times New Roman", serif;
+      color: var(--primary);
+    }
+    h1 { margin: 0; font: 700 1.9rem/1.2 "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif; }
+    p { margin: 12px 0 28px; color: var(--ink-2); line-height: 1.55; }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 28px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    a:hover { filter: brightness(1.1); }
+    a:focus-visible { outline: 3px solid #c8932d; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="plate" aria-hidden="true">404</div>
+    <h1>This dish isn't on the menu</h1>
+    <p>The page you are looking for doesn't exist or may have moved. Head back to the menu to see everything we're serving today.</p>
+    <a href="./" id="home-link">View the menu</a>
+  </main>
+  <script>
+    // On a project site (username.github.io/repository/...) the menu lives in
+    // the first folder of the address; elsewhere it is the site root.
+    (function () {
+      var link = document.getElementById("home-link");
+      var parts = window.location.pathname.split("/").filter(Boolean);
+      var isProjectSite = /\.github\.io$/i.test(window.location.hostname) && parts.length > 0;
+      link.href = isProjectSite ? "/" + parts[0] + "/" : "/";
+    })();
+  </script>
+</body>
+</html>

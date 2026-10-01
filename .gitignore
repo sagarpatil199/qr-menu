@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local tooling (this project needs no build step)
+node_modules/
+*.log
+
+# Raw/working photo files: commit only the optimised images in assets/
+*.psd
+*.xcf
+*.heic
+*.HEIC
