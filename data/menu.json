@@ -24,7 +24,7 @@
           "name": "Medu Vada (2 pcs)",
           "description": "Crispy golden lentil doughnuts with chutney and sambar.",
           "price": 50,
-          "image": "assets/menu/Crispy Medu Vada with Sambar and Chutney.png"
+          "image": "assets/menu/Crispy Medu Vada with Sambar and Chutney.png",
           "isVeg": true,
           "isAvailable": true,
           "isBestseller": true,
