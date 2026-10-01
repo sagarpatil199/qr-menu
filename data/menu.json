@@ -37,7 +37,7 @@
           "name": "Masala Dosa",
           "description": "Crisp rice crepe filled with spiced potato bhaji, served with chutney and sambar.",
           "price": 80,
-          "image": "assets/menu/masala-dosa.svg",
+          "image": "assets/menu/Golden Masala Dosa Feast.png",
           "isVeg": true,
           "isAvailable": true,
           "isBestseller": true,
