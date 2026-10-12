@@ -335,12 +335,20 @@
     var dialog = $("item-modal");
     var currency = state.restaurant.currency || "";
 
-    $("menu-sections").addEventListener("click", function (e) {
-      var cardNode = e.target.closest(".card");
-      if (!cardNode) return;
-      var item = state.itemsById[cardNode.getAttribute("data-id")];
-      if (item) UI.openModal(item, currency);
-    });
+    
+$("menu-sections").addEventListener("click", function (e) {
+  // Add to Cart click par details popup mat kholo.
+  if (e.target.closest("[data-add-to-cart]")) {
+    return;
+  }
+
+  var cardNode = e.target.closest(".card");
+  if (!cardNode) return;
+
+  var item = state.itemsById[cardNode.getAttribute("data-id")];
+  if (item) UI.openModal(item, currency);
+});
+
 
     $("modal-close").addEventListener("click", UI.closeModal);
     // Click on the dark backdrop closes the dialog.
