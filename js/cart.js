@@ -1,5 +1,5 @@
 
-/* QR Menu Cart: staff checkout + WhatsApp checkout */
+/* QR Menu Cart: Staff checkout + WhatsApp checkout */
 (function (window, document) {
   "use strict";
 
@@ -64,24 +64,25 @@
     if ($("staff-dialog").open) {
       $("staff-dialog").close();
     }
+
+    var message = $("cart-message");
+    if (message) message.textContent = "";
   }
 
-  function customerDetails() {
+  function getCustomerDetails() {
     var name = $("customer-name").value.trim();
     var phone = $("customer-phone").value.replace(/\D/g, "");
     var table = $("customer-table").value.trim();
     var notes = $("customer-notes").value.trim();
 
-    // Accept a 10-digit Indian mobile number.
-    // Also accept numbers entered with India's 91 country code.
-    if (phone.length === 12 && phone.indexOf("91") === 0) {
-      phone = phone.slice(2);
-    }
-
     if (!name) {
-      window.alert("Please enter your name.");
+      window.alert("Please enter your name for the WhatsApp order.");
       $("customer-name").focus();
       return null;
+    }
+
+    if (phone.length === 12 && phone.indexOf("91") === 0) {
+      phone = phone.slice(2);
     }
 
     if (!/^[6-9]\d{9}$/.test(phone)) {
@@ -104,9 +105,15 @@
     };
   }
 
+  function getStaffDetails() {
+    return {
+      table: $("customer-table").value.trim(),
+      notes: $("customer-notes").value.trim()
+    };
+  }
+
   function addItem(id) {
     var item = getItem(id);
-
     if (!item || !item.isAvailable) return;
 
     var variation = null;
@@ -154,13 +161,18 @@
     cart[key].qty += 1;
     render();
 
-    // Close the item details popup after adding successfully.
+    // Close details only after successfully adding the dish.
     if (
       window.QRMenu &&
       window.QRMenu.UI &&
       window.QRMenu.UI.closeModal
     ) {
       window.QRMenu.UI.closeModal();
+    }
+
+    var message = $("cart-message");
+    if (message) {
+      message.textContent = item.name + " added to cart.";
     }
   }
 
@@ -213,7 +225,6 @@
         b.setAttribute("aria-label", x[2]);
 
         if (x[1] === "quantity") b.disabled = true;
-
         controls.appendChild(b);
       });
 
@@ -228,31 +239,38 @@
     });
   }
 
-  function orderText(details) {
+  function makeOrder(details, includeCustomer) {
     var ref = orderRef();
 
     var lines = [
-      "*New QR Menu Order*",
+      "*QR MENU ORDER*",
       restaurant.name || "Restaurant",
       "Order reference: " + ref,
       "Date/time: " + stamp(),
-      "",
-      "Customer: " + details.name,
-      "Mobile: " + details.phone,
-      "Table: " + details.table,
-      "",
-      "*Items*"
+      ""
     ];
 
+    if (includeCustomer) {
+      lines.push(
+        "Customer: " + details.name,
+        "Mobile: " + details.phone
+      );
+    }
+
+    if (details.table) {
+      lines.push("Table: " + details.table);
+    }
+
+    lines.push("", "*Items*");
+
     Object.keys(cart).forEach(function (key, i) {
-      var x = cart[key];
+      var item = cart[key];
 
       lines.push(
-        (i + 1) + ". " +
-        x.name +
-        (x.variation ? " (" + x.variation + ")" : "") +
-        " × " + x.qty +
-        " — " + money(x.price * x.qty)
+        (i + 1) + ". " + item.name +
+        (item.variation ? " (" + item.variation + ")" : "") +
+        " × " + item.qty + " — " +
+        money(item.price * item.qty)
       );
     });
 
@@ -262,13 +280,7 @@
       lines.push("Instructions: " + details.notes);
     }
 
-    lines.push("", "Please confirm this order.");
-
-    return {
-      ref: ref,
-      text: lines.join("\n"),
-      details: details
-    };
+    return { ref: ref, lines: lines };
   }
 
   function showStaffOrder() {
@@ -277,40 +289,39 @@
       return;
     }
 
-    var details = customerDetails();
-    if (!details) return;
-
-    var order = orderText(details);
+    // Staff checkout does NOT require name or mobile number.
+    var details = getStaffDetails();
+    var order = makeOrder(details, false);
     var host = $("staff-order-content");
+
     host.textContent = "";
 
-    var meta = document.createElement("p");
-    meta.className = "staff-order-meta";
-    meta.textContent = order.ref + " · " + stamp();
-    host.appendChild(meta);
+    function addLine(text, tag) {
+      var node = document.createElement(tag || "p");
+      node.textContent = text;
+      host.appendChild(node);
+    }
 
-    [
-      ["Name", details.name],
-      ["Mobile", details.phone],
-      ["Table", details.table]
-    ].forEach(function (pair) {
-      var p = document.createElement("p");
-      p.textContent = pair[0] + ": " + pair[1];
-      host.appendChild(p);
-    });
+    addLine(order.lines[2] + " · " + order.lines[3], "p");
+
+    if (details.table) {
+      addLine("Table: " + details.table);
+    } else {
+      addLine("Table: Please tell the staff");
+    }
 
     var list = document.createElement("ul");
     list.className = "staff-order-list";
 
     Object.keys(cart).forEach(function (key) {
-      var x = cart[key];
+      var item = cart[key];
       var li = document.createElement("li");
 
       li.textContent =
-        x.name +
-        (x.variation ? " (" + x.variation + ")" : "") +
-        " × " + x.qty +
-        " — " + money(x.price * x.qty);
+        item.name +
+        (item.variation ? " (" + item.variation + ")" : "") +
+        " × " + item.qty + " — " +
+        money(item.price * item.qty);
 
       list.appendChild(li);
     });
@@ -322,9 +333,7 @@
     host.appendChild(totalLine);
 
     if (details.notes) {
-      var note = document.createElement("p");
-      note.textContent = "Instructions: " + details.notes;
-      host.appendChild(note);
+      addLine("Instructions: " + details.notes);
     }
 
     $("order-dialog").close();
@@ -337,25 +346,29 @@
       return;
     }
 
-    var details = customerDetails();
+    // WhatsApp checkout requires name, mobile and table number.
+    var details = getCustomerDetails();
     if (!details) return;
 
-    var order = orderText(details);
+    var order = makeOrder(details, true);
     var number = String(restaurant.whatsapp || "").replace(/\D/g, "");
 
     if (!number) {
       window.alert(
-        "Please configure the restaurant WhatsApp number in data/restaurant.json."
+        "Configure the restaurant WhatsApp number in data/restaurant.json."
       );
       return;
     }
 
-    var url =
-      "https://wa.me/" + number +
-      "?text=" + encodeURIComponent(order.text);
+    if (!details.table) {
+      window.alert("Please enter your table number.");
+      $("customer-table").focus();
+      return;
+    }
 
-    // Open WhatsApp first. Clear the cart only if the browser
-    // successfully opens the WhatsApp window.
+    var url = "https://wa.me/" + number +
+      "?text=" + encodeURIComponent(order.lines.join("\n"));
+
     var waWindow = window.open(url, "_blank");
 
     if (waWindow) {
@@ -411,12 +424,11 @@
 
     $("menu-sections").addEventListener("click", function (e) {
       var b = e.target.closest("[data-add-to-cart]");
+      if (!b) return;
 
-      if (b) {
-        e.preventDefault();
-        e.stopPropagation();
-        addItem(b.getAttribute("data-add-to-cart"));
-      }
+      e.preventDefault();
+      e.stopPropagation();
+      addItem(b.getAttribute("data-add-to-cart"));
     });
 
     $("open-cart").addEventListener("click", function () {
@@ -432,8 +444,7 @@
       $("staff-dialog").close();
     });
 
-    // Staff confirms they have finished with this order:
-    // clear cart and return to the menu.
+    // Done means the customer has finished showing the order to staff.
     $("staff-done").addEventListener("click", clearCart);
 
     $("show-staff-order").addEventListener("click", showStaffOrder);
@@ -454,10 +465,7 @@
         cart[key].qty -= 1;
       }
 
-      if (
-        b.dataset.cartAction === "remove" ||
-        cart[key].qty <= 0
-      ) {
+      if (b.dataset.cartAction === "remove" || cart[key].qty <= 0) {
         delete cart[key];
       }
 
