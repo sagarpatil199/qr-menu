@@ -31,6 +31,7 @@
   <script defer src="js/menu.js"></script>
   <script defer src="js/ui.js"></script>
   <script defer src="js/app.js"></script>
+  <script defer src="js/cart.js"></script>
 </head>
 <body class="is-loading">
   <a class="skip-link" href="#menu">Skip to menu</a>
@@ -117,6 +118,42 @@
     </div>
   </div>
   </main>
+
+  <!-- ============ CART / ORDER OPTIONS ============ -->
+  <aside class="cart-dock" id="cart-dock" hidden aria-live="polite">
+    <div class="cart-dock__summary"><strong id="cart-count">0 items</strong><span id="cart-total">₹0</span></div>
+    <button type="button" class="btn btn--primary cart-dock__button" id="open-cart">View Cart</button>
+  </aside>
+
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
+    <div class="order-dialog__panel">
+      <button type="button" class="order-dialog__close" id="order-close" aria-label="Close order">×</button>
+      <h2 id="order-title">Your Order</h2>
+      <p class="order-intro">Check your items, then choose how to place your order.</p>
+      <div id="cart-items" class="cart-items"></div>
+      <div class="cart-total-line"><strong>Total</strong><strong id="cart-grand-total">₹0</strong></div>
+      <div class="customer-fields">
+        <label>Your name (optional)<input id="customer-name" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name"></label>
+        <label>Table number (optional)<input id="customer-table" type="text" maxlength="20" placeholder="e.g. 5"></label>
+        <label>Special instructions (optional)<textarea id="customer-notes" rows="2" maxlength="300" placeholder="Less spicy, no onion..."></textarea></label>
+      </div>
+      <div class="order-options">
+        <button type="button" class="btn btn--primary" id="show-staff-order">Show Order to Staff</button>
+        <button type="button" class="btn btn--whatsapp" id="send-whatsapp-order">Order via WhatsApp</button>
+      </div>
+      <p class="order-smallprint">No online payment. WhatsApp orders are sent only after you press Send in WhatsApp.</p>
+    </div>
+  </dialog>
+
+  <dialog class="staff-dialog" id="staff-dialog" aria-labelledby="staff-title">
+    <div class="staff-dialog__panel">
+      <button type="button" class="order-dialog__close" id="staff-close" aria-label="Close staff order">×</button>
+      <p class="staff-kicker">PLEASE SHOW THIS SCREEN TO STAFF</p>
+      <h2 id="staff-title">Your Order</h2>
+      <div id="staff-order-content"></div>
+      <button type="button" class="btn btn--primary staff-done" id="staff-done">Done</button>
+    </div>
+  </dialog>
 
   <!-- ============ FOOTER / RESTAURANT INFO ============ -->
   <footer class="info" id="info" aria-labelledby="info-title">
