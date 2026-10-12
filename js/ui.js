@@ -353,6 +353,7 @@
     if (item.description) body.appendChild(el("p", { class: "card__desc", text: item.description }));
     body.appendChild(priceBlock(item, currency, "card__price"));
     if (unavailable) body.appendChild(el("p", { class: "card__status", text: "Currently Unavailable" }));
+    else body.appendChild(el("button", { type: "button", class: "btn btn--primary card__add", "data-add-to-cart": item.id, text: "Add to Cart" }));
     article.appendChild(body);
 
     if (item.image) {
