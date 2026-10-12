@@ -133,18 +133,20 @@
       <div id="cart-items" class="cart-items"></div>
       <div class="cart-total-line"><strong>Total</strong><strong id="cart-grand-total">₹0</strong></div>
     
+
 <div class="customer-fields">
-  <label for="customer-name">Your name *</label>
+  <p>Customer details are required only for WhatsApp orders.</p>
+
+  <label for="customer-name">Your name (WhatsApp only)</label>
   <input
     id="customer-name"
     type="text"
     maxlength="80"
     autocomplete="name"
     placeholder="Enter your name"
-    required
   >
 
-  <label for="customer-phone">Mobile number *</label>
+  <label for="customer-phone">Mobile number (WhatsApp only)</label>
   <input
     id="customer-phone"
     type="tel"
@@ -152,16 +154,14 @@
     autocomplete="tel-national"
     placeholder="10-digit mobile number"
     maxlength="10"
-    required
   >
 
-  <label for="customer-table">Table number *</label>
+  <label for="customer-table">Table number (optional for staff)</label>
   <input
     id="customer-table"
     type="text"
     maxlength="20"
     placeholder="e.g. 5"
-    required
   >
 
   <label for="customer-notes">Special instructions (optional)</label>
@@ -172,6 +172,7 @@
     placeholder="Less spicy, no onion..."
   ></textarea>
 </div>
+
 
       <div class="order-options">
         <button type="button" class="btn btn--primary" id="show-staff-order">Show Order to Staff</button>
