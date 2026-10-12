@@ -940,3 +940,44 @@ body.is-loading .toolbar { visibility: hidden; }
   .card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; animation: none; }
   .info { color: #000; background: none; }
 }
+
+/* ---------- Demo cart and two checkout choices ---------- */
+.card__add { position: relative; z-index: 2; align-self: flex-start; margin-top: 10px; padding: 9px 14px; min-height: 40px; }
+.cart-dock { position: fixed; z-index: 30; left: max(12px, env(safe-area-inset-left)); right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: 0 8px 32px rgba(0,0,0,.2); }
+.cart-dock__summary { display: flex; flex-direction: column; line-height: 1.35; }
+.cart-dock__summary span { color: var(--primary-ink); font-weight: 800; font-size: 1.1rem; }
+.cart-dock__button { flex: 0 0 auto; }
+.order-dialog, .staff-dialog { border: 0; padding: 0; width: min(560px, calc(100% - 24px)); max-width: 560px; max-height: min(90dvh, 850px); border-radius: 22px; color: var(--ink); background: var(--surface); box-shadow: var(--shadow); }
+.order-dialog::backdrop, .staff-dialog::backdrop { background: rgba(25,12,8,.62); backdrop-filter: blur(3px); }
+.order-dialog__panel, .staff-dialog__panel { position: relative; padding: 24px 18px; overflow-y: auto; max-height: min(90dvh, 850px); }
+.order-dialog__panel h2, .staff-dialog__panel h2 { padding-right: 42px; font-family: var(--font-display); font-size: 1.65rem; }
+.order-dialog__close { position: absolute; top: 12px; right: 12px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--primary-soft); color: var(--primary-ink); font-size: 1.7rem; line-height: 1; }
+.order-intro { margin-top: 7px; color: var(--ink-2); font-size: .92rem; }
+.cart-items { margin-top: 18px; border-top: 1px solid var(--line); }
+.cart-line { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px 10px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.cart-line__details { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cart-line__details strong { overflow-wrap: anywhere; }
+.cart-line__details span { color: var(--ink-3); font-size: .82rem; }
+.cart-line__controls { display: flex; align-items: center; gap: 5px; grid-column: 1; }
+.cart-line__controls button { min-width: 34px; min-height: 34px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); }
+.cart-line__controls button:disabled { background: var(--primary-soft); font-weight: 800; opacity: 1; }
+.cart-line__controls button[data-cart-action="remove"] { padding: 0 8px; font-size: .78rem; }
+.cart-line__subtotal { grid-column: 2; grid-row: 1 / span 2; align-self: center; white-space: nowrap; }
+.cart-total-line { display: flex; justify-content: space-between; padding: 16px 0; font-size: 1.15rem; }
+.customer-fields { display: grid; gap: 12px; }
+.customer-fields label { display: grid; gap: 5px; font-size: .88rem; font-weight: 700; }
+.customer-fields input, .customer-fields textarea { width: 100%; min-height: 44px; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--surface); color: var(--ink); font-weight: 400; }
+.customer-fields textarea { resize: vertical; }
+.order-options { display: grid; gap: 10px; margin-top: 18px; }
+.order-options .btn { min-height: 48px; }
+.btn--whatsapp { background: #168c4a; color: #fff; }
+.btn--whatsapp:hover { background: #0f713b; }
+.order-smallprint { margin-top: 12px; color: var(--ink-3); font-size: .76rem; text-align: center; }
+.staff-kicker { color: var(--primary-ink); font-weight: 800; letter-spacing: .08em; font-size: .75rem; margin-bottom: 8px; }
+.staff-order-meta { margin: 14px 0; color: var(--ink-3); font-size: .84rem; }
+.staff-order-list { margin: 14px 0; padding-left: 22px; }
+.staff-order-list li { padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.staff-dialog__panel h3 { padding: 14px 0; border-top: 2px solid var(--ink); font-size: 1.25rem; }
+.staff-done { width: 100%; min-height: 48px; margin-top: 14px; }
+@media (min-width: 720px) { .order-dialog__panel, .staff-dialog__panel { padding: 28px; } .order-options { grid-template-columns: 1fr 1fr; } }
+@media print { .cart-dock, .order-dialog, .staff-dialog { display: none !important; } }
