@@ -132,11 +132,47 @@
       <p class="order-intro">Check your items, then choose how to place your order.</p>
       <div id="cart-items" class="cart-items"></div>
       <div class="cart-total-line"><strong>Total</strong><strong id="cart-grand-total">₹0</strong></div>
-      <div class="customer-fields">
-        <label>Your name (optional)<input id="customer-name" type="text" maxlength="80" autocomplete="name" placeholder="Enter your name"></label>
-        <label>Table number (optional)<input id="customer-table" type="text" maxlength="20" placeholder="e.g. 5"></label>
-        <label>Special instructions (optional)<textarea id="customer-notes" rows="2" maxlength="300" placeholder="Less spicy, no onion..."></textarea></label>
-      </div>
+    
+<div class="customer-fields">
+  <label for="customer-name">Your name *</label>
+  <input
+    id="customer-name"
+    type="text"
+    maxlength="80"
+    autocomplete="name"
+    placeholder="Enter your name"
+    required
+  >
+
+  <label for="customer-phone">Mobile number *</label>
+  <input
+    id="customer-phone"
+    type="tel"
+    inputmode="numeric"
+    autocomplete="tel-national"
+    placeholder="10-digit mobile number"
+    maxlength="10"
+    required
+  >
+
+  <label for="customer-table">Table number *</label>
+  <input
+    id="customer-table"
+    type="text"
+    maxlength="20"
+    placeholder="e.g. 5"
+    required
+  >
+
+  <label for="customer-notes">Special instructions (optional)</label>
+  <textarea
+    id="customer-notes"
+    rows="2"
+    maxlength="300"
+    placeholder="Less spicy, no onion..."
+  ></textarea>
+</div>
+
       <div class="order-options">
         <button type="button" class="btn btn--primary" id="show-staff-order">Show Order to Staff</button>
         <button type="button" class="btn btn--whatsapp" id="send-whatsapp-order">Order via WhatsApp</button>
