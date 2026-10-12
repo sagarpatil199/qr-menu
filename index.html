@@ -135,44 +135,33 @@
       <div class="cart-total-line"><strong>Total</strong><strong id="cart-grand-total">₹0</strong></div>
     
 
-<div class="customer-fields">
-  <p>Customer details are required only for WhatsApp orders.</p>
 
-  <label for="customer-name">Your name (WhatsApp only)</label>
-  <input
-    id="customer-name"
-    type="text"
-    maxlength="80"
-    autocomplete="name"
-    placeholder="Enter your name"
-  >
+<div class="customer-fields" id="whatsapp-fields" hidden>
+  <p>Fill in your details to place your order via WhatsApp.</p>
 
-  <label for="customer-phone">Mobile number (WhatsApp only)</label>
-  <input
-    id="customer-phone"
-    type="tel"
-    inputmode="numeric"
-    autocomplete="tel-national"
-    placeholder="10-digit mobile number"
-    maxlength="10"
-  >
+  <label for="customer-name">Your name</label>
+  <input id="customer-name" type="text" maxlength="80"
+         autocomplete="name" placeholder="Enter your name">
 
-  <label for="customer-table">Table number (optional for staff)</label>
-  <input
-    id="customer-table"
-    type="text"
-    maxlength="20"
-    placeholder="e.g. 5"
-  >
+  <label for="customer-phone">Mobile number</label>
+  <input id="customer-phone" type="tel" inputmode="numeric"
+         autocomplete="tel-national" maxlength="10"
+         placeholder="10-digit mobile number">
+
+  <label for="customer-table">Table number</label>
+  <input id="customer-table" type="text" maxlength="20"
+         placeholder="Enter your table number">
 
   <label for="customer-notes">Special instructions (optional)</label>
-  <textarea
-    id="customer-notes"
-    rows="2"
-    maxlength="300"
-    placeholder="Less spicy, no onion..."
-  ></textarea>
+  <textarea id="customer-notes" rows="2" maxlength="300"
+            placeholder="Less spicy, no onion..."></textarea>
+
+  <button type="button" class="btn btn--primary"
+          id="confirm-whatsapp-order">
+    Continue to WhatsApp
+  </button>
 </div>
+
 
 
       <div class="order-options">
