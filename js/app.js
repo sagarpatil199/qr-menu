@@ -371,6 +371,8 @@ $("menu-sections").addEventListener("click", function (e) {
     return (err && err.message) || "Please check your internet connection and try again.";
   }
 
+
+  
   function start() {
     Promise.all([Menu.loadJSON(DATA.restaurant), Menu.loadJSON(DATA.menu)])
       .then(function (results) {
@@ -378,6 +380,21 @@ $("menu-sections").addEventListener("click", function (e) {
         restaurant.name = restaurant.name || "Our Menu";
         var menu = Menu.normalizeMenu(results[1]);
 
+var festival = restaurant.festivalMessage;
+var festivalBox = $("festival-message");
+
+if (festivalBox) {
+  if (festival && festival.enabled) {
+    $("festival-emoji").textContent = festival.emoji || "🎉";
+    $("festival-title").textContent = festival.title || "";
+    $("festival-text").textContent = festival.message || "";
+    festivalBox.hidden = false;
+  } else {
+    festivalBox.hidden = true;
+  }
+}
+
+        
         state.restaurant = restaurant;
         state.categories = menu.categories;
         menu.categories.forEach(function (c) {
