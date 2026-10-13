@@ -34,11 +34,6 @@
   <script defer src="js/cart.js"></script>
 </head>
 <body class="is-loading">
-   <div id="festival-message" class="festival-message" hidden>
-    <span id="festival-emoji"></span>
-    <h2 id="festival-title"></h2>
-    <p id="festival-text"></p>
-  </div>
   <a class="skip-link" href="#menu">Skip to menu</a>
 
   <!-- Inline icon sprite: no extra network requests -->
@@ -60,6 +55,15 @@
 
   <!-- ============ HEADER ============ -->
   <header class="hero" id="top">
+    <!-- Festival announcement: filled from restaurant.json "festivalMessage" by js/app.js -->
+    <aside class="festival" id="festival-message" aria-label="Festival greeting" hidden>
+      <div class="festival__head">
+        <span class="festival__emoji" id="festival-emoji" aria-hidden="true"></span>
+        <h2 class="festival__title" id="festival-title"></h2>
+      </div>
+      <p class="festival__text" id="festival-text"></p>
+    </aside>
+
     <div class="hero__inner">
       <img class="hero__logo" id="restaurant-logo" src="" alt="" width="96" height="96" hidden>
       <h1 class="hero__name" id="restaurant-name">Our Menu</h1>
