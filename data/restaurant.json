@@ -44,7 +44,7 @@
   },
 
   "festivalMessage": {
-    "enabled": true,
+    "enabled": false,
     "title": "Happy Dasara!",
     "message": "Wishing you happiness, prosperity and delicious moments with your family.",
     "emoji": "🌼"
