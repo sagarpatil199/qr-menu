@@ -389,31 +389,74 @@ svg { width: 1em; height: 1em; flex-shrink: 0; }
 .catnav__link.is-active::after { transform: scaleX(1); }
 
 
-/*----Festival Message---*/
+/* ---------- Festival announcement (inside the hero) ----------
+   Mobile: compact banner at the top of the maroon header.
+   Wide desktop: the banner sits on the LEFT, the restaurant block stays centred. */
 
-.festival-message {
-  max-width: 280px;
-  padding: 18px;
-  text-align: center;
-  color: #ffe5a3;
-  background: rgba(90, 0, 0, 0.35);
-  border: 1px solid rgba(255, 215, 119, 0.6);
+.festival {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto 18px;
+  padding: 12px 16px 13px;
+  text-align: left;
+  color: #fff4dc;
+  background:
+    radial-gradient(120% 140% at 100% 100%, rgba(255, 190, 80, 0.20), transparent 60%),
+    rgba(40, 0, 0, 0.28);
+  border: 1px solid rgba(240, 192, 96, 0.75);
   border-radius: 16px;
-  margin: 16px;
+  box-shadow: inset 0 0 0 3px rgba(40, 0, 0, 0.25), 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+.festival__head { display: flex; align-items: center; gap: 8px; }
+.festival__emoji { font-size: 1.35rem; line-height: 1; }
+.festival__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 5.4vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #f6c869;
+  text-wrap: balance;
+}
+.festival__text {
+  margin-top: 4px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: #fff4dc;
+}
+/* Empty values leave no gap and cause no errors */
+.festival__emoji:empty,
+.festival__title:empty,
+.festival__text:empty { display: none; }
+
+@media (min-width: 720px) {
+  .festival { padding: 14px 20px 16px; }
+  .festival__text { font-size: 0.95rem; }
 }
 
-.festival-message h2 {
-  margin: 8px 0;
-  font-size: 1.5rem;
-}
-
-.festival-message p {
-  margin: 0;
-  line-height: 1.5;
-}
-
-.festival-message[hidden] {
-  display: none !important;
+@media (min-width: 1200px) {
+  .hero:has(.festival:not([hidden])) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 560px) minmax(0, 1fr);
+    align-items: center;
+    column-gap: 32px;
+  }
+  .hero:has(.festival:not([hidden])) .hero__inner { grid-column: 2; grid-row: 1; width: 100%; }
+  .festival {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 0 0 8px;
+    padding: 22px 22px 24px;
+    text-align: center;
+    border-radius: 22px;
+  }
+  .festival__head { flex-direction: column; justify-content: center; gap: 6px; }
+  .festival__emoji { font-size: 1.9rem; }
+  .festival__title { font-size: 1.9rem; }
+  .festival__text { margin-top: 10px; font-size: 1rem; line-height: 1.5; }
 }
 
 /* ---------- Menu ---------- */
