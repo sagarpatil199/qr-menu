@@ -88,6 +88,34 @@
     if (meta) meta.setAttribute("content", rgbToHex(primary));
   }
 
+  /* ---------- Festival announcement ---------- */
+
+  /**
+   * Shows the greeting inside the header from restaurant.json -> festivalMessage:
+   *   { "enabled": true, "title": "...", "message": "...", "emoji": "..." }
+   * Missing property, enabled:false, or no title AND no message => the banner
+   * stays hidden and takes no space. Nothing here is hard-coded to a festival.
+   */
+  function renderFestival(restaurant) {
+    var box = $("festival-message");
+    if (!box) return;
+
+    var f = restaurant && restaurant.festivalMessage;
+    var title = f && typeof f.title === "string" ? f.title.trim() : "";
+    var message = f && typeof f.message === "string" ? f.message.trim() : "";
+    var emoji = f && typeof f.emoji === "string" ? f.emoji.trim() : "";
+
+    if (!f || f.enabled !== true || (!title && !message)) {
+      box.hidden = true;
+      return;
+    }
+
+    $("festival-emoji").textContent = emoji;
+    $("festival-title").textContent = title;
+    $("festival-text").textContent = message;
+    box.hidden = false;
+  }
+
   /* ---------- SEO / sharing ---------- */
 
   function setMeta(selector, value) {
@@ -335,20 +363,18 @@
     var dialog = $("item-modal");
     var currency = state.restaurant.currency || "";
 
-    
-$("menu-sections").addEventListener("click", function (e) {
-  // Add to Cart click par details popup mat kholo.
-  if (e.target.closest("[data-add-to-cart]")) {
-    return;
-  }
+    $("menu-sections").addEventListener("click", function (e) {
+      // Add to Cart click par details popup mat kholo.
+      if (e.target.closest("[data-add-to-cart]")) {
+        return;
+      }
 
-  var cardNode = e.target.closest(".card");
-  if (!cardNode) return;
+      var cardNode = e.target.closest(".card");
+      if (!cardNode) return;
 
-  var item = state.itemsById[cardNode.getAttribute("data-id")];
-  if (item) UI.openModal(item, currency);
-});
-
+      var item = state.itemsById[cardNode.getAttribute("data-id")];
+      if (item) UI.openModal(item, currency);
+    });
 
     $("modal-close").addEventListener("click", UI.closeModal);
     // Click on the dark backdrop closes the dialog.
@@ -371,8 +397,6 @@ $("menu-sections").addEventListener("click", function (e) {
     return (err && err.message) || "Please check your internet connection and try again.";
   }
 
-
-  
   function start() {
     Promise.all([Menu.loadJSON(DATA.restaurant), Menu.loadJSON(DATA.menu)])
       .then(function (results) {
@@ -380,21 +404,6 @@ $("menu-sections").addEventListener("click", function (e) {
         restaurant.name = restaurant.name || "Our Menu";
         var menu = Menu.normalizeMenu(results[1]);
 
-var festival = restaurant.festivalMessage;
-var festivalBox = $("festival-message");
-
-if (festivalBox) {
-  if (festival && festival.enabled) {
-    $("festival-emoji").textContent = festival.emoji || "🎉";
-    $("festival-title").textContent = festival.title || "";
-    $("festival-text").textContent = festival.message || "";
-    festivalBox.hidden = false;
-  } else {
-    festivalBox.hidden = true;
-  }
-}
-
-        
         state.restaurant = restaurant;
         state.categories = menu.categories;
         menu.categories.forEach(function (c) {
@@ -404,6 +413,7 @@ if (festivalBox) {
         applyTheme(restaurant.theme);
         applySeo(restaurant, menu.categories);
         UI.renderHeader(restaurant);
+        renderFestival(restaurant);
         UI.renderFooter(restaurant);
         UI.renderCategoryNav(menu.categories);
         UI.renderMenu(menu.categories, restaurant.currency || "");
