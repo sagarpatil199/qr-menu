@@ -470,8 +470,8 @@ svg { width: 1em; height: 1em; flex-shrink: 0; }
   border: 1px solid #e8b75b;
   border-radius: 8px;
   box-sizing: border-box;
-  margin-top: -15px; /* Move ticker upward */
-  margin-bottom: 5px; /* Space before logo */
+  margin-top: -50px; /* Move ticker upward */
+  margin-bottom: 10px; /* Space before logo */
 }
 
 .message-ticker__track {
