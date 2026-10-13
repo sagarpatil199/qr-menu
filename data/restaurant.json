@@ -1,3 +1,4 @@
+
 {
   "name": "Hotel Shivneri",
   "tagline": "Authentic Taste Since 1995",
@@ -26,13 +27,13 @@
 
   "timezone": "Asia/Kolkata",
   "openingHours": [
-    { "day": "Monday",    "open": "07:00", "close": "22:30" },
-    { "day": "Tuesday",   "open": "07:00", "close": "22:30" },
+    { "day": "Monday", "open": "07:00", "close": "22:30" },
+    { "day": "Tuesday", "open": "07:00", "close": "22:30" },
     { "day": "Wednesday", "open": "07:00", "close": "22:30" },
-    { "day": "Thursday",  "open": "07:00", "close": "22:30" },
-    { "day": "Friday",    "open": "07:00", "close": "23:00" },
-    { "day": "Saturday",  "open": "07:00", "close": "23:00" },
-    { "day": "Sunday",    "open": "08:00", "close": "23:00" }
+    { "day": "Thursday", "open": "07:00", "close": "22:30" },
+    { "day": "Friday", "open": "07:00", "close": "23:00" },
+    { "day": "Saturday", "open": "07:00", "close": "23:00" },
+    { "day": "Sunday", "open": "08:00", "close": "23:00" }
   ],
 
   "siteUrl": "https://sagarpatil199.github.io/hotel-shivneri-menu/",
@@ -40,5 +41,12 @@
   "theme": {
     "primary": "#8B0000",
     "secondary": "#F5E6C8"
+  },
+
+  "festivalMessage": {
+    "enabled": true,
+    "title": "Happy Dasara!",
+    "message": "Wishing you happiness, prosperity and delicious moments with your family.",
+    "emoji": "🌼"
   }
 }
