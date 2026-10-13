@@ -459,6 +459,85 @@ svg { width: 1em; height: 1em; flex-shrink: 0; }
   .festival__text { margin-top: 10px; font-size: 1rem; line-height: 1.5; }
 }
 
+.message-ticker {
+  width: 100%;
+  height: 42px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #fff0c9;
+  color: #8b0000;
+  border: 1px solid #e8b75b;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.message-ticker__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  white-space: nowrap;
+  animation: messageFlow 32s linear infinite;
+}
+
+.message-ticker__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.message-ticker__item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.message-ticker__item::after {
+  content: "|";
+  color: #b77b25;
+  margin-left: 20px;
+}
+
+.message-ticker:hover .message-ticker__track {
+  animation-play-state: paused;
+}
+
+@keyframes messageFlow {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 600px) {
+  .message-ticker {
+    height: 36px;
+    border-radius: 6px;
+  }
+
+  .message-ticker__item {
+    font-size: 12px;
+    padding: 0 12px;
+  }
+
+  .message-ticker__item::after {
+    margin-left: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .message-ticker {
+    overflow-x: auto;
+  }
+
+  .message-ticker__track {
+    animation: none;
+  }
+}
 /* ---------- Menu ---------- */
 
 .menu {
