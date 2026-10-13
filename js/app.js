@@ -116,6 +116,45 @@
     box.hidden = false;
   }
 
+  function initMessageTicker() {
+  var track = document.getElementById("messageTickerTrack");
+
+  if (!track) return;
+
+  var messages = [
+    "🌼 Happy Dasara!",
+    "🙏 Wishing you happiness and prosperity.",
+    "🪔 Try our special festive menu!",
+    "🌺 Visit with your family."
+  ];
+
+  // Repeat messages for a continuous scrolling effect
+  function createGroup() {
+    var group = document.createElement("div");
+    group.className = "message-ticker__group";
+
+    messages.forEach(function (message) {
+      var item = document.createElement("span");
+      item.className = "message-ticker__item";
+      item.textContent = message;
+      group.appendChild(item);
+    });
+
+    return group;
+  }
+
+  track.replaceChildren();
+
+  var firstGroup = createGroup();
+  var secondGroup = createGroup();
+
+  secondGroup.setAttribute("aria-hidden", "true");
+
+  track.appendChild(firstGroup);
+  track.appendChild(secondGroup);
+}
+
+initMessageTicker();
   /* ---------- SEO / sharing ---------- */
 
   function setMeta(selector, value) {
