@@ -388,6 +388,34 @@ svg { width: 1em; height: 1em; flex-shrink: 0; }
 .catnav__link.is-active { color: var(--primary-ink); }
 .catnav__link.is-active::after { transform: scaleX(1); }
 
+
+/*----Festival Message---*/
+
+.festival-message {
+  max-width: 280px;
+  padding: 18px;
+  text-align: center;
+  color: #ffe5a3;
+  background: rgba(90, 0, 0, 0.35);
+  border: 1px solid rgba(255, 215, 119, 0.6);
+  border-radius: 16px;
+  margin: 16px;
+}
+
+.festival-message h2 {
+  margin: 8px 0;
+  font-size: 1.5rem;
+}
+
+.festival-message p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.festival-message[hidden] {
+  display: none !important;
+}
+
 /* ---------- Menu ---------- */
 
 .menu {
